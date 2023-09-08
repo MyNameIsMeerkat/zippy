@@ -120,6 +120,9 @@ const
 #     result = (s2 shl 16) or s1
 
 #elif defined(arm64):
+
+var hostArch = ""
+
 when defined(arm64):
 
   let sysctlOut = staticExec("sysctl -n sysctl.proc_translated")
