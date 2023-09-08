@@ -320,20 +320,20 @@ template currentExceptionAsZippyError*(): untyped =
   let e = getCurrentException()
   newException(ZippyError, e.getStackTrace & e.msg, e)
 
-# when defined(amd64):
+when defined(amd64):
 #   # Runtime check if SSE 4.1 and PCLMULQDQ are available
-#   proc cpuid*(eaxi, ecxi: int32): tuple[eax, ebx, ecx, edx: int32] =
+  proc cpuid*(eaxi, ecxi: int32): tuple[eax, ebx, ecx, edx: int32] =
 #     when defined(vcc):
 #       proc cpuid(cpuInfo: ptr int32, functionId, subFunctionId: int32)
 #         {.cdecl, importc: "__cpuidex", header: "intrin.h".}
 #       cpuid(result.eax.addr, eaxi, ecxi)
 #     else:
-#       var (eaxr, ebxr, ecxr, edxr) = (0'i32, 0'i32, 0'i32, 0'i32)
-#       asm """
-#         cpuid
-#         :"=a"(`eaxr`), "=b"(`ebxr`), "=c"(`ecxr`), "=d"(`edxr`)
-#         :"a"(`eaxi`), "c"(`ecxi`)"""
-#       (eaxr, ebxr, ecxr, edxr)
+      var (eaxr, ebxr, ecxr, edxr) = (0'i32, 0'i32, 0'i32, 0'i32)
+      asm """
+        cpuid
+        :"=a"(`eaxr`), "=b"(`ebxr`), "=c"(`ecxr`), "=d"(`edxr`)
+        :"a"(`eaxi`), "c"(`ecxi`)"""
+      (eaxr, ebxr, ecxr, edxr)
 
 when defined(release):
   {.pop.}
