@@ -121,10 +121,8 @@ const
 
 #elif defined(arm64):
 
-var hostArch = ""
-
 when defined(arm64):
-
+  var hostArch = ""
   let sysctlOut = staticExec("sysctl -n sysctl.proc_translated")
   if sysctlOut in ["0", "1"]:
       hostArch = "arm64"
