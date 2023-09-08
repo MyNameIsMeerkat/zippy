@@ -11,7 +11,8 @@ const
   nmax = 5552
   blockSize = 32.uint32
 
-when defined(amd64):
+# when defined(amd64):
+if false :
   when defined(gcc) or defined(clang):
     {.localPassc: "-mssse3".}
 
@@ -119,7 +120,8 @@ when defined(amd64):
 
     result = (s2 shl 16) or s1
 
-elif defined(arm64):
+# elif defined(arm64):
+else:
   {.push header: "arm_neon.h".}
 
   type
