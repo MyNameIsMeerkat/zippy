@@ -123,8 +123,9 @@ const
 
 when defined(arm64):
   var hostArch = ""
-  let sysctlOut = staticExec("sysctl -n sysctl.proc_translated")
-  if sysctlOut in ["0", "1"]:
+  #let sysctlOut = staticExec("sysctl -n sysctl.proc_translated")
+  #if sysctlOut in ["0", "1"]:
+  if true:
       hostArch = "arm64"
       echo hostArch
 
